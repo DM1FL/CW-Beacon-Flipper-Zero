@@ -13,10 +13,12 @@ typedef struct {
    Replace carrier_on/off internals if your branch symbols differ slightly. */
 
 static void carrier_on() {
+    if(!furi_hal_subghz_is_tx_allowed(CW_FREQ)) return; // Sicherheitscheck
+
     furi_hal_subghz_idle();
+    furi_hal_subghz_load_preset(FuriHalSubGhzPresetIdRfPotRaw);
     furi_hal_subghz_set_frequency_and_path(CW_FREQ);
-    // custom preset/loading can be inserted here if needed
-    furi_hal_subghz_tx();
+    furi_hal_subghz_start_packet_tx(); // Manche Firmware-Versionen bevorzugen dies für Träger
 }
 
 static void carrier_off() {
