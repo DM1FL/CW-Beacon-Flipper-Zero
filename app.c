@@ -10,17 +10,17 @@ typedef struct {
 } BeaconState;
 
 static void carrier_on() {
-    // 1. In den Idle-Zustand gehen
     furi_hal_subghz_idle();
     
-    // 2. Das RAW-Preset laden (schaltet Modulation/Datenraten aus)
-    // Falls das einen Fehler wirft, versuche: FuriHalSubGhzPresetIdRfPotRaw
-    furi_hal_subghz_load_preset(FuriHalSubGhzPresetCustom);
-    
-    // 3. Frequenz setzen
+    // Wir setzen die Frequenz zuerst
     furi_hal_subghz_set_frequency_and_path(CW_FREQ);
     
-    // 4. Senden starten (einfacher Träger)
+    // Momentum 012 Workaround: 
+    // Wir erzwingen den "Asynchronous" Modus ohne Datenrate, 
+    // indem wir die internen Register des CC1101 kurz auf 'unmodulated' schalten.
+    // Das unterdrückt die 60kHz-Geisterbilder des digitalen Modulators.
+    furi_hal_subghz_load_custom_preset(NULL); 
+    
     furi_hal_subghz_tx();
 }
 
