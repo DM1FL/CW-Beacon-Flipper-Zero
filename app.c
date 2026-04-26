@@ -12,14 +12,13 @@ typedef struct {
 static void carrier_on() {
     furi_hal_subghz_idle();
     
-    // Wir setzen die Frequenz zuerst
+    // In Momentum 012 setzt diese Funktion oft das Default-Profil.
+    // Danach schalten wir einfach den Träger ein.
     furi_hal_subghz_set_frequency_and_path(CW_FREQ);
     
-    // Momentum 012 Workaround: 
-    // Wir erzwingen den "Asynchronous" Modus ohne Datenrate, 
-    // indem wir die internen Register des CC1101 kurz auf 'unmodulated' schalten.
-    // Das unterdrückt die 60kHz-Geisterbilder des digitalen Modulators.
-    furi_hal_subghz_load_custom_preset(NULL); 
+    // WICHTIG: Manchmal hilft ein minimales Delay, 
+    // damit der PLL des Chips stabil einschwingt.
+    furi_delay_us(50);
     
     furi_hal_subghz_tx();
 }
