@@ -9,15 +9,19 @@ typedef struct {
     uint16_t wpm;
 } BeaconState;
 
-/* Momentum 012 HAL scaffold:
-   Replace carrier_on/off internals if your branch symbols differ slightly. */
-
 static void carrier_on() {
-    if(!furi_hal_subghz_is_tx_allowed(CW_FREQ)) return; // Sicherheitscheck
+    // 1. In den Idle-Zustand gehen
     furi_hal_subghz_idle();
+    
+    // 2. Das RAW-Preset laden (schaltet Modulation/Datenraten aus)
+    // Falls das einen Fehler wirft, versuche: FuriHalSubGhzPresetIdRfPotRaw
     furi_hal_subghz_load_preset(FuriHalSubGhzPresetIdRfPotRaw);
+    
+    // 3. Frequenz setzen
     furi_hal_subghz_set_frequency_and_path(CW_FREQ);
-    furi_hal_subghz_start_packet_tx(); // Manche Firmware-Versionen bevorzugen dies für Träger
+    
+    // 4. Senden starten (einfacher Träger)
+    furi_hal_subghz_tx();
 }
 
 static void carrier_off() {
@@ -48,12 +52,14 @@ int32_t cw_beacon_app(void* p) {
     UNUSED(p);
     BeaconState state = {.running=true, .wpm=15};
 
-    FuriThread* th = furi_thread_alloc_ex("cw_beacon", 4096, beacon_worker, &state);
+    // Stack-Größe und Thread-Initialisierung
+    FuriThread* th = furi_thread_alloc_ex("cw_beacon", 2048, beacon_worker, &state);
     furi_thread_start(th);
 
+    // Back-Button Check (Momentum Standard GPIO)
     while(state.running) {
-        if(furi_hal_gpio_read(&gpio_button_back)==false) {
-            state.running=false;
+        if(furi_hal_gpio_read(&gpio_button_back) == false) {
+            state.running = false;
         }
         furi_delay_ms(100);
     }
