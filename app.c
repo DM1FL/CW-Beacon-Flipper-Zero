@@ -14,7 +14,6 @@ typedef struct {
 
 static void carrier_on() {
     if(!furi_hal_subghz_is_tx_allowed(CW_FREQ)) return; // Sicherheitscheck
-
     furi_hal_subghz_idle();
     furi_hal_subghz_load_preset(FuriHalSubGhzPresetIdRfPotRaw);
     furi_hal_subghz_set_frequency_and_path(CW_FREQ);
