@@ -12,14 +12,14 @@ typedef struct {
 static void carrier_on() {
     furi_hal_subghz_idle();
     
-    // In Momentum 012 setzt diese Funktion oft das Default-Profil.
-    // Danach schalten wir einfach den Träger ein.
+    // Wir laden das OOK_RAW Preset, das ist am nächsten am reinen Träger.
+    // Falls das auch einen Fehler wirft, nehmen wir 'FuriHalSubGhzPresetCustom'
+    furi_hal_subghz_load_preset(FuriHalSubGhzPresetIdOOKRaw);
+    
     furi_hal_subghz_set_frequency_and_path(CW_FREQ);
     
-    // WICHTIG: Manchmal hilft ein minimales Delay, 
-    // damit der PLL des Chips stabil einschwingt.
-    furi_delay_us(50);
-    
+    // WICHTIG: Wir sagen dem Chip explizit, dass er kein Paket senden soll, 
+    // sondern einfach den Träger einschaltet.
     furi_hal_subghz_tx();
 }
 
