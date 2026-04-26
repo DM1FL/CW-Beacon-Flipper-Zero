@@ -15,7 +15,7 @@ static void carrier_on() {
     
     // 2. Das RAW-Preset laden (schaltet Modulation/Datenraten aus)
     // Falls das einen Fehler wirft, versuche: FuriHalSubGhzPresetIdRfPotRaw
-    furi_hal_subghz_load_preset(FuriHalSubGhzPresetIdRfPotRaw);
+    furi_hal_subghz_load_preset(FuriHalSubGhzPresetCustom);
     
     // 3. Frequenz setzen
     furi_hal_subghz_set_frequency_and_path(CW_FREQ);
