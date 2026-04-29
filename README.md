@@ -16,7 +16,7 @@ Dieses Projekt verwandelt den Flipper Zero in eine leistungsstarke CW-Funkbake (
    ufbt launch
 
 ## Konfiguration
-Öffne die app.c und passe die folgenden Zeilen an dein Rufzeichen und deine Wunschfrequenz an:
+Öffne die `app.c` und passe die folgenden Zeilen an dein Rufzeichen und deine Wunschfrequenz an:
 
 TARGET_FREQ: Deine Sendefrequenz.
 
