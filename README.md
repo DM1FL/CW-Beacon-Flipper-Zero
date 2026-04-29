@@ -13,7 +13,7 @@ Dieses Projekt verwandelt den Flipper Zero in eine leistungsstarke CW-Funkbake (
 1. Installiere das [uFBT SDK](https://github.com/flipperdevices/flipperzero-ufbt).
 2. Kopiere die Dateien `app.c` und `application.fam` in einen Ordner.
 3. Öffne ein Terminal in diesem Ordner und führe aus:
-   ufbt launch
+   **ufbt launch**
 
 ## Konfiguration
 Öffne die `app.c` und passe die folgenden Zeilen an dein Rufzeichen und deine Wunschfrequenz an:
