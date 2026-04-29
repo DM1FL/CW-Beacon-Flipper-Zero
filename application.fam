@@ -1,7 +1,0 @@
-App(
-    appid="cw_beacon_dm1flb",
-    name="CW Beacon DM1FL/B",
-    apptype=FlipperAppType.EXTERNAL,
-    entry_point="cw_beacon_app",
-    stack_size=4 * 1024,
-)
