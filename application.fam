@@ -1,0 +1,13 @@
+App(
+    appid="cw_beacon_fl",          # Eindeutige ID der App
+    name="CW Beacon DM1FL",       # Name, der im Flipper-Menü erscheint
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="cw_beacon_app",  # Muss exakt mit dem Funktionsnamen in app.c übereinstimmen
+    requires=["gui"],
+    stack_size=2 * 1024,
+    fap_category="Tools",         # Kategorie im Menü
+    #fap_icon="icon.png",          # Optional: Falls du ein 10x10px Icon erstellst
+    fap_description="Leistungsstarke CW-Funkbake für 70cm mit Dauerträger-Funktion.",
+    fap_author="DM1FL",           # Dein Rufzeichen als Autor
+    fap_version="1.1",
+)
