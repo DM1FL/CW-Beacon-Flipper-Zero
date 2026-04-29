@@ -15,7 +15,7 @@ Dieses Projekt verwandelt den Flipper Zero in eine leistungsstarke CW-Funkbake (
 3. Öffne ein Terminal in diesem Ordner und führe aus:
    ufbt launch
 
-Konfiguration
+## Konfiguration
 Öffne die app.c und passe die folgenden Zeilen an dein Rufzeichen und deine Wunschfrequenz an:
 
 TARGET_FREQ: Deine Sendefrequenz.
@@ -24,7 +24,7 @@ CORRECTION: Falls dein Flipper (wie in Tests festgestellt) einen Offset hat, kan
 
 DOT_MS: Ändere die Morse-Geschwindigkeit (150 = langsam, 60 = schnell).
 
-Rechtlicher Hinweis
+## Rechtlicher Hinweis
 Achtung: Das Senden auf Amateurfunkfrequenzen erfordert eine entsprechende Lizenz. Der Betreiber ist für die Einhaltung der örtlichen Gesetze verantwortlich. Die Nutzung erfolgt auf eigene Gefahr.
 
 73 de DM1FL
